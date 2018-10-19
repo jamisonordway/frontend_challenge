@@ -5,4 +5,4 @@ node_modules
 npm-debug.log*
 
 # mongo
-mongo/data
+docker/mongo/data

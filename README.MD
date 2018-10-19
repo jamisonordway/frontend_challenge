@@ -47,6 +47,17 @@ Evaluation of candidates will be factored based on 3 main criteria:
   - How well you handle errors and unexpected faults
   - How well you can take unfamiliar data and understand it.
 
+## Configuration
+
+The following tables lists the configurable application environment variables that need to be defined in the `docker/mongo/mongo.env`.
+
+| Parameter        | Description           | Example  |
+| ------------- |-------------| -----|
+| MONGO_INITDB_ROOT_USERNAME | DB user with admin authentication and given the role of root | admin |
+| MONGO_INITDB_ROOT_PASSWORD | DB Admin password | secretpassword |
+| MONGO_INITDB_DATABASE | Name of a database to be used for creation scripts in /docker-entrypoint-initdb.d/*.js | mymongodb
+
+
 # Installation
 Install npm dependencies
 ```bash
