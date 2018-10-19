@@ -1,4 +1,4 @@
-.PHONY: client mongo server unbindPort3000 unbindPort8080 unbindPort27017
+.PHONY: client mongo server unbindAPIPort unbindClientPort unbindMongoPort
 
 client:
 	#
@@ -9,13 +9,13 @@ mongo:
 server:
 	#
 
-unbindPort3000:
+unbindAPIPort:
 	kill -9 $$(lsof -i :3000 | grep main | awk '{ print $$2}' | xargs) ||:
 
-unbindPort8080:
+unbindClientPort:
 	kill -9 $$(lsof -i :8080 | grep main | awk '{ print $$2}' | xargs) ||:
 
-unbindPort27017:
+unbindMongoPort:
 	kill -9 $$(lsof -i :27017 | grep main | awk '{ print $$2}' | xargs) ||:
 
 start:
