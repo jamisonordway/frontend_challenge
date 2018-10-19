@@ -1,0 +1,45 @@
+version: '3'
+networks:
+    proxy:
+services:
+    traefik:
+        image: traefik
+        command: --api --docker
+        networks:
+            - proxy
+        ports:
+            - "80:80"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        labels:
+            - "traefik.backend=traefik"
+            - "traefik.frontend.rule=Host:traefik.challenge.localhost"
+            - "traefik.port=8080"
+    api:
+        container_name: api-challenge
+        build:
+        context: .
+            dockerfile: ./docker/server/Dockerfile
+        networks:
+            - proxy
+        restart: always
+        labels:
+            - "traefik.backend=api"
+            - "traefik.frontend.rule=Host:ui-challenge.localhost"
+            - traefik.docker.network=proxy
+            - "traefik.port=3000"
+    ui:
+        container_name: ui-challenge
+        build:
+            context: .
+            dockerfile: ./docker/server/Dockerfile
+        networks:
+            - proxy
+        depends_on:
+            - api
+        restart: always
+        labels:
+            - "traefik.backend=ui"
+            - "traefik.frontend.rule=Host:ui-challenge.localhost"
+            - "traefik.docker.network=proxy"
+            - "traefik.port=80"
