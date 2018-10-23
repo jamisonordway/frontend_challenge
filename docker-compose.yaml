@@ -18,7 +18,7 @@ services:
     api:
         container_name: api-challenge
         build:
-        context: .
+            context: .
             dockerfile: ./docker/server/Dockerfile
         networks:
             - proxy
@@ -28,6 +28,8 @@ services:
             - "traefik.frontend.rule=Host:ui-challenge.localhost"
             - traefik.docker.network=proxy
             - "traefik.port=3000"
+        links:
+            - mongo
     ui:
         container_name: ui-challenge
         build:
@@ -43,3 +45,19 @@ services:
             - "traefik.frontend.rule=Host:ui-challenge.localhost"
             - "traefik.docker.network=proxy"
             - "traefik.port=80"
+    mongo:
+        container_name: mongo-challenge
+        build:
+            context: .
+            dockerfile: ./docker/mongo/Dockerfile
+        networks:
+            - proxy
+        restart: always
+        labels:
+            - "traefik.enable=false"
+        ports:
+            - "27017:27017"
+        volumes:
+            - ./docker/mongo/data:/data/db
+        environment:
+            MONGO_INITDB_ROOT_PASSWORD_FILE:
