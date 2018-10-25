@@ -1,15 +1,15 @@
 default: &default
-  adapter: sqlite3
+  adapter: mongoid
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  database: db/development.mongoid
 test:
   <<: *default
-  database: db/test.sqlite3
+  database: db/test.mongoid
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: db/production.mongoid
