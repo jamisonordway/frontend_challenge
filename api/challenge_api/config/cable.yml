@@ -1,0 +1,8 @@
+development:
+  adapter: async
+
+test:
+  adapter: async
+
+production:
+  channel_prefix: challenge_api_production

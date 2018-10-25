@@ -30,7 +30,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "superagent": "^3.8.2",
-    "swagger-ui-dist": "^3.9.1"
+    "swagger-ui-dist": "^3.9.1",
+    "url-parse": "^1.4.3"
   },
   "engines": {
     "node": ">=8.0.0"

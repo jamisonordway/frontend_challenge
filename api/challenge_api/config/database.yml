@@ -1,0 +1,15 @@
+default: &default
+  adapter: mongoid
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+development:
+  <<: *default
+  database: db/development.mongoid
+test:
+  <<: *default
+  database: db/test.mongoid
+
+production:
+  <<: *default
+  database: db/production.mongoid
